@@ -39,7 +39,7 @@ class AuthController extends Controller
     'password'=>'required|string|min:4'
     ]);
 
-    $user = User::where('email', $validated['email']);
+    $user = User::where('email', $validated['email'])->first();
     if(!$user || !Hash::check($validated['password'], $user->password));
 
     throw ValidatedException::witMessages([
