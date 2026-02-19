@@ -3,6 +3,10 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RoleController;
 
+Route::post('\register', [Authenticator::class, 'register']);
+Route::post('\login', [Authenticator::class, 'login']);
+
+
 Route::post('/saveRole', [RoleController::class, 'createRole']);
 Route::get('/getRoles', [RoleController::class, 'readAllRoles']);
 Route::get('/getRole/{id}', [RoleController::class, 'readRole']);
