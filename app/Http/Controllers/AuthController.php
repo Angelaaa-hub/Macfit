@@ -40,6 +40,18 @@ class AuthController extends Controller
     ]);
 
     $user = User::where('email', $validated['email']);
-    }
+    if(!$user || !Hash::check($validated['password'], $user->password));
 
+    throw ValidatedException::witMessages([
+        'Error'=>['inavalid Credentials'],], 401);
+    
+    $token = $user->createToken("auth-token")->plainTextToken;
+
+    return response()->json([
+        'token'=>$token,
+        'message'=>"Login Succesful!",
+        'user'=> $user
+    ], 201);
+
+    }
 }
